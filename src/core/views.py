@@ -18,10 +18,3 @@ class TestView(APIView):
         }
 
         return Response(data)
-
-#def test_view(request):
-    # We want to return a json file not html page
-    #data = {
-    #    'name': 'john',
-    #}
-    #return JsonResponse(data)   # safe=False to pass in any datatype
