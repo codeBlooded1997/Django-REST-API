@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 
 # Third party imports
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -13,12 +14,15 @@ class TestView(APIView):
     """
     By using a classbased view and ingeriting from APIView gives us a lot of methods to work with.
     """
+    # No matther what method we are using,  we have to we authenticated in order to this view to handle our request.
+    permission_classes = (IsAuthenticated, )
+
     def get(self, request, *args, **kwargs):
         qs = Post.objects.all()
         # serializing a qs of a model so no need for validating
         # Serializeing multiple elements
         serializer = PostSerializer(qs, many=True)
-        
+
         # serializing single element
         #post = qs.first()
         #serializer = PostSerializer(post)
